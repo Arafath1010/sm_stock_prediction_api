@@ -1,12 +1,8 @@
----
-title: Newapi
-emoji: 🔥
-colorFrom: purple
+title: Fastapi Demo
+emoji: 🐠
+colorFrom: red
 colorTo: red
-sdk: gradio
-sdk_version: 4.7.1
-app_file: app.py
+sdk: docker
 pinned: false
----
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
