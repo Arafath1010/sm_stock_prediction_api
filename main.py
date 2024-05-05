@@ -42,9 +42,9 @@ async def model_trigger(page:str):
           'accept': 'application/json'
         }
         
-        #response = requests.request("GET", url, headers=headers, data=payload)
+        response = requests.request("GET", url, headers=headers, data=payload)
         
-        #print(response.text)
+        print(response.text)
 
         page = int(page)
         page = page + 1
