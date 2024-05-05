@@ -1,5 +1,5 @@
 ---
-title: Fastapi Demo
+title: api_trigger
 emoji: 🐠
 colorFrom: red
 colorTo: red
