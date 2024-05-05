@@ -10,7 +10,7 @@ app = FastAPI()
 
 @app.on_event("startup")
 @repeat_every(seconds=60 * 12)  # 1 hour
-def refresh_the_api():
+async def refresh_the_api():
     
     url = "https://research-project-h4fb.onrender.com/refresh_api"
     
@@ -26,6 +26,27 @@ def refresh_the_api():
 
 
 @app.get("/test")
-def read_root():
+async def read_root():
     return {"message":"running"}
+    
+
+@app.get("/start_model_trigger")
+async def model_trigger(page_starting_point:str):
+    while True:
+        page = str(page)
+        url = "https://api-ai-service.transexpress.lk/trigger_the_data_fecher?page="+page+"&paginate=10000"
+        print(url,page)
+        
+        payload = {}
+        headers = {
+          'accept': 'application/json'
+        }
+        
+        #response = requests.request("GET", url, headers=headers, data=payload)
+        
+        #print(response.text)
+
+        page = int(page)
+        page = page + 1
+
 
