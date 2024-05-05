@@ -31,7 +31,7 @@ async def read_root():
     
 
 @app.get("/start_model_trigger")
-async def model_trigger(page_starting_point:str):
+async def model_trigger(page:str):
     while True:
         page = str(page)
         url = "https://api-ai-service.transexpress.lk/trigger_the_data_fecher?page="+page+"&paginate=10000"
