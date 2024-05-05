@@ -1,5 +1,6 @@
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import StreamingResponse
+from fastapi_utils.tasks import repeat_every
 import os
 import io
 import requests
@@ -8,7 +9,7 @@ app = FastAPI()
 
 
 @app.on_event("startup")
-@repeat_every(seconds=60 * 10)  # 1 hour
+@repeat_every(seconds=60 * 12)  # 1 hour
 def refresh_the_api():
     
     url = "https://research-project-h4fb.onrender.com/refresh_api"
