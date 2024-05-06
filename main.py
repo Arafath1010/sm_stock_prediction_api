@@ -45,6 +45,7 @@ async def model_trigger(page:int):
         response = requests.request("GET", url, headers=headers, data=payload)
         page = int(page)+1
         print(response.text)
+        break
     return page
 
 
