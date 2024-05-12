@@ -3,3 +3,10 @@ uvicorn
 python-multipart
 requests
 fastapi-utils
+uvicorn
+fastapi
+python-multipart
+requests
+pandasai 
+hugchat
+pyyaml
