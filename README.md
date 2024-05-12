@@ -1,5 +1,5 @@
 ---
-title: api_trigger
+title: research_imagegen_api
 emoji: 🐠
 colorFrom: red
 colorTo: red
