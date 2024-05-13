@@ -29,8 +29,11 @@ async def get_image_for_text(email,query,file: UploadFile = File(...)):
         with open(email+".csv", "wb") as file_object:
             file_object.write(file.file.read())
         llm = OpenAI(api_token=secret,save_charts=True)
-        df = pd.read_csv(email+".csv") 
-        sdf = SmartDataframe(df, config={"llm": llm})
-        sdf.chat(query)
-        image_path = "exports/charts/temp_chart.png"  # Replace with your image's path
-        return FileResponse(image_path)
+        try:
+            df = pd.read_csv(email+".csv") 
+            sdf = SmartDataframe(df, config={"llm": llm})
+            sdf.chat(query)
+            image_path = "exports/charts/temp_chart.png"  # Replace with your image's path
+            return FileResponse(image_path)
+        except:
+            return "try again"
