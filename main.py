@@ -51,6 +51,6 @@ async def get_image_for_text(email,query,file: UploadFile = File(...)):
             image_path = "exports/charts/temp_chart.png"  # Replace with your image's path
             base64str = convert_image_to_base64(image_path)
             return {"id":str(uuid1),"image":base64str}
-        except Exception as e
+        except Exception as e:
             print(str(e))
             return "try again"
