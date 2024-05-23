@@ -40,12 +40,21 @@ def convert_image_to_base64(image_path):
 @app.post("/get_image_for_text")
 async def get_image_for_text(email,query,file: UploadFile = File(...)):
         print(file.filename)
-        with open(email+".csv", "wb") as file_object:
+        file_name = file.filename
+        with open(email+file_name, "wb") as file_object:
             file_object.write(file.file.read())
         uuid1 = uuid.uuid1()
         llm = OpenAI(api_token=secret,save_charts=True)
+
+        # Determine the file type and read accordingly
+        if file_name.endswith('.csv'):
+            df = pd.read_csv(email+file_name)
+        elif file_name.endswith('.xls') or file_name.endswith('.xlsx'):
+            df = pd.read_excel(email+file_name)
+        else:
+            return {"error": "Unsupported file type"}
+            
         try:
-            df = pd.read_csv(email+".csv") 
             sdf = SmartDataframe(df, config={"llm": llm})
             sdf.chat(query)
             image_path = "exports/charts/temp_chart.png"  # Replace with your image's path
