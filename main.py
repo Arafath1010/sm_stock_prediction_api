@@ -61,12 +61,25 @@ async def get_image_for_text(email,query,file: UploadFile = File(...)):
         else:
             return {"error": "Unsupported file type"}
             
+        sdf = SmartDataframe(df, config={"llm": llm})
+        sdf.chat(query)  
+
+        code_to_exec = """
+        import matplotlib.pyplot as plt
+        import seaborn as sns\n"""
+        code_to_exec = code_to_exec + sdf.last_code_generated.replace("dfs[0]","dfs")
+        code_to_exec = code_to_exec.replace("/content/exports/charts/temp_chart.png",email+file_name+".png")
+        print(code_to_exec)
+        local_vars = {'dfs': df}
+        exec(code_to_exec, globals(), local_vars)
         try:
-            sdf = SmartDataframe(df, config={"llm": llm})
-            sdf.chat(query)
-            print(df.head())
+
+            print(email+file_name+".png",df.head())
+            
+            return FileResponse(email+file_name+".png")
             image_path = "exports/charts/temp_chart.png"  # Replace with your image's path
             base64str = convert_image_to_base64(image_path)
+            
             return {"id":str(uuid1),"image":base64str}
         except Exception as e:
             print(str(e))
