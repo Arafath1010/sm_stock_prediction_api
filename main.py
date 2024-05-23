@@ -37,6 +37,12 @@ def convert_image_to_base64(image_path):
         img_base64_string = img_base64.decode("utf-8")
     return img_base64_string
 
+df = pd.read_csv("233.csv")
+sdf = SmartDataframe(df, config={"llm": llm})
+sdf.chat(query)
+image_path = "exports/charts/temp_chart.png"  # Replace with your image's path
+base64str = convert_image_to_base64(image_path)
+
 @app.post("/get_image_for_text")
 async def get_image_for_text(email,query,file: UploadFile = File(...)):
         print(file.filename)
