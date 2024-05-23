@@ -65,15 +65,13 @@ async def get_image_for_text(email,query,file: UploadFile = File(...)):
     
         print(code_to_exec)
         local_vars = {'dfs': df}
-        exec(code_to_exec, globals(), local_vars)
+        
         try:
-
+            exec(code_to_exec, globals(), local_vars)
             print(email+file_name+".png",df.head())
             
-            return FileResponse(email+file_name+".png")
-            
-            image_path = "exports/charts/temp_chart.png"  # Replace with your image's path
-            base64str = convert_image_to_base64(image_path)
+            #return FileResponse(email+file_name+".png")
+            base64str = convert_image_to_base64(email+file_name+".png")
             
             return {"id":str(uuid1),"image":base64str}
         except Exception as e:
