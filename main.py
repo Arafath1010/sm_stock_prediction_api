@@ -36,7 +36,8 @@ def convert_image_to_base64(image_path):
         img_base64 = base64.b64encode(img_bytes)
         img_base64_string = img_base64.decode("utf-8")
     return img_base64_string
-
+    
+llm = OpenAI(api_token=secret,save_charts=True)
 df = pd.read_csv("233.csv")
 sdf = SmartDataframe(df, config={"llm": llm})
 sdf.chat(query)
