@@ -67,6 +67,7 @@ async def get_image_for_text(email,query,file: UploadFile = File(...)):
         code_to_exec = "import matplotlib.pyplot as plt\nimport seaborn as sns\n"
         code_to_exec = code_to_exec + sdf.last_code_generated.replace("dfs[0]","dfs")
         code_to_exec = code_to_exec.replace("exports/charts/temp_chart.png",email+file_name+".png")
+        code_to_exec = code_to_exec+f"\nplt.savefig('{email+file_name}.png')"
     
         print(code_to_exec)
         local_vars = {'dfs': df}
