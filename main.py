@@ -40,7 +40,7 @@ def convert_image_to_base64(image_path):
 llm = OpenAI(api_token=secret,save_charts=True)
 df = pd.read_csv("233.csv")
 sdf = SmartDataframe(df, config={"llm": llm})
-sdf.chat(query)
+sdf.chat("give bar chart")
 image_path = "exports/charts/temp_chart.png"  # Replace with your image's path
 base64str = convert_image_to_base64(image_path)
 
