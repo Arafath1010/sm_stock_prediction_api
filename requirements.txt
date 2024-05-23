@@ -11,3 +11,6 @@ pandasai
 hugchat
 pyyaml
 openpyxl
+matplotlib
+seaborn
+
