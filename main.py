@@ -8,6 +8,14 @@ from io import StringIO
 import os
 import uuid
 
+import googletrans
+from googletrans import Translator
+translator = Translator()
+lan = googletrans.LANGUAGES
+#print(lan)
+keys = list(lan.keys())
+vals = list(lan.values())
+
 from pandasai import SmartDataframe
 import pandas as pd
 from pandasai.llm import OpenAI
@@ -27,6 +35,11 @@ app.add_middleware(
 import base64
 from PIL import Image
 from io import BytesIO
+
+@app.post("/translator")
+async def tra(sentence,lang):
+        lang = lang.lower()
+        return translator.translate(sentence,dest=keys[vals.index(lang)]).text
 
 def convert_image_to_base64(image_path):
     with Image.open(image_path) as image:
