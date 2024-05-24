@@ -13,4 +13,5 @@ pyyaml
 openpyxl
 matplotlib
 seaborn
+googletrans==4.0.0-rc1
 
