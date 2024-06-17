@@ -7,8 +7,7 @@ uvicorn
 fastapi
 python-multipart
 requests
-pandasai 
-pandas
+pandasai
 hugchat
 pyyaml
 openpyxl
