@@ -4,6 +4,7 @@ python-multipart
 requests
 fastapi-utils
 pandasai==2.2.1
+numpy==1.25.2
 pyyaml
 openpyxl
 matplotlib
