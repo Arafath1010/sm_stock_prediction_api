@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from io import StringIO
 import os
 import uuid
-# from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 
 # import googletrans
 # from googletrans import Translator
@@ -36,10 +36,10 @@ import base64
 from PIL import Image
 from io import BytesIO
 
-@app.post("/translator")
-async def tra(sentence,lang):
-        lang = lang.lower()
-        return translator.translate(sentence,dest=keys[vals.index(lang)]).text
+# @app.post("/translator")
+# async def tra(sentence,lang):
+#         lang = lang.lower()
+#         return translator.translate(sentence,dest=keys[vals.index(lang)]).text
 
 def convert_image_to_base64(image_path):
     with Image.open(image_path) as image:
@@ -52,14 +52,14 @@ def convert_image_to_base64(image_path):
     
 
 # # Function to call the endpoint
-# def call_my_endpoint():
+def call_my_endpoint():
 #     #response = requests.get("http://127.0.0.1:8000/my-endpoint")
-#     print(f"Endpoint response: {response.json()}")
+     print(f"Endpoint response: {response.json()}")
 
 # # Configure the scheduler
-# scheduler = BackgroundScheduler()
-# scheduler.add_job(call_my_endpoint, 'interval', seconds=15)  # Call every 30 seconds
-# scheduler.start()
+scheduler = BackgroundScheduler()
+scheduler.add_job(call_my_endpoint, 'interval', seconds=15)  # Call every 30 seconds
+scheduler.start()
 
 @app.post("/get_image_for_text")
 async def get_image_for_text(email,query,file: UploadFile = File(...)):
