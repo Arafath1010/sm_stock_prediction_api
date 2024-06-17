@@ -3,7 +3,6 @@ from fastapi.responses import HTMLResponse
 from fastapi.responses import StreamingResponse
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-import pandas as pd
 from io import StringIO
 import os
 import uuid
