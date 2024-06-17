@@ -3,14 +3,8 @@ uvicorn
 python-multipart
 requests
 fastapi-utils
-uvicorn
-fastapi
-python-multipart
-requests
-pandasai
+pandasai==2.2.1
 pyyaml
 openpyxl
 matplotlib
 seaborn
-googletrans==4.0.0-rc1
-apscheduler
