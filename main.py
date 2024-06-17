@@ -7,6 +7,7 @@ import pandas as pd
 from io import StringIO
 import os
 import uuid
+from apscheduler.schedulers.background import BackgroundScheduler
 
 import googletrans
 from googletrans import Translator
@@ -50,6 +51,16 @@ def convert_image_to_base64(image_path):
         img_base64_string = img_base64.decode("utf-8")
     return img_base64_string
     
+
+# Function to call the endpoint
+def call_my_endpoint():
+    #response = requests.get("http://127.0.0.1:8000/my-endpoint")
+    print(f"Endpoint response: {response.json()}")
+
+# Configure the scheduler
+scheduler = BackgroundScheduler()
+scheduler.add_job(call_my_endpoint, 'interval', seconds=15)  # Call every 30 seconds
+scheduler.start()
 
 @app.post("/get_image_for_text")
 async def get_image_for_text(email,query,file: UploadFile = File(...)):
