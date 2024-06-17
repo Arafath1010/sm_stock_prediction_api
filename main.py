@@ -6,15 +6,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from io import StringIO
 import os
 import uuid
-from apscheduler.schedulers.background import BackgroundScheduler
+# from apscheduler.schedulers.background import BackgroundScheduler
 
-import googletrans
-from googletrans import Translator
-translator = Translator()
-lan = googletrans.LANGUAGES
-#print(lan)
-keys = list(lan.keys())
-vals = list(lan.values())
+# import googletrans
+# from googletrans import Translator
+# translator = Translator()
+# lan = googletrans.LANGUAGES
+# #print(lan)
+# keys = list(lan.keys())
+# vals = list(lan.values())
 
 from pandasai import SmartDataframe
 import pandas as pd
