@@ -1,5 +1,5 @@
 # Use the official Python 3.9 image
-FROM python:3.12
+FROM python:3.10.12
 
 # Set the working directory to /code
 WORKDIR /code
