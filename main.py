@@ -5,7 +5,8 @@ from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from io import StringIO
 import os
-import uuid
+import uuid,requests
+
 from apscheduler.schedulers.background import BackgroundScheduler
 
 # import googletrans
