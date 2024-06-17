@@ -53,7 +53,7 @@ def convert_image_to_base64(image_path):
 
 # # Function to call the endpoint
 def call_my_endpoint():
-#     #response = requests.get("http://127.0.0.1:8000/my-endpoint")
+     response = requests.post('https://research-project-h4fb.onrender.com/refresh_api')
      print(f"Endpoint response: {response.json()}")
 
 # # Configure the scheduler
