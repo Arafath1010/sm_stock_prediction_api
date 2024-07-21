@@ -39,4 +39,4 @@ async def get_product_count_prediction(b_id:int,product_name:str):
       # Convert to dictionary
       result_dict = rounded_value.to_dict(orient="records")[0]
         
-      return {"next_month":str(result_dict[next_month]) , "predicted_count":result_dict[predicted_count]}
+      return {"next_month":str(result_dict["next_month"]) , "predicted_count":result_dict["predicted_count"]}
