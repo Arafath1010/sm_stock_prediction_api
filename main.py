@@ -33,4 +33,4 @@ async def get_image_for_text(b_id:int,product_name:str):
         
       full_trend,forecasted_value,rounded_value = dc.forecast(monthly_sales)
       print(full_trend,forecasted_value,rounded_value)
-      return rounded_value
+      return {"predicted_count" : str(rounded_value)}
