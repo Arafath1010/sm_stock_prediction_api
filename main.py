@@ -7,6 +7,7 @@ from io import StringIO
 import os
 import uuid,requests
 import data_collector as dc
+import pandas as pd
 
 app = FastAPI()
 app.add_middleware(
