@@ -1,12 +1,39 @@
 import mysql.connector
 from decimal import Decimal
 import pandas as pd
+from prophet import Prophet
+import math
 # Define the connection parameters
 host = "159.138.104.192"
 user = "storemate_ml"
 password = "bTgZd77VpD^o4Ai6Dw9xs9"
 database = "lite_version"
 
+
+
+def forecast(monthly_sales):
+  # Prepare the data for Prophet
+  monthly_sales.rename(columns={'transaction_date': 'ds', 'sell_qty': 'y'}, inplace=True)
+
+  # Initialize and fit the Prophet model
+  model = Prophet()
+  model.fit(monthly_sales)
+
+  # Make a future dataframe for the next month
+  future = model.make_future_dataframe(periods=1, freq='M')
+  forecast = model.predict(future)
+
+  # Extract the forecasted sales for the next month
+  forecasted_sales = forecast[['ds', 'yhat']].tail(2)
+
+  # Combine historical and forecasted data
+  combined_sales = pd.concat([monthly_sales, forecasted_sales[-1:]], ignore_index=True)
+  original_forecasted_value = combined_sales.tail(1)
+  rounded_value = combined_sales.tail(1)
+
+  rounded_value['yhat'] = rounded_value['yhat'].apply(lambda x: max(0, math.ceil(x)))
+
+  return combined_sales,original_forecasted_value,rounded_value
 
 def get_data(b_id,product_name):
   # Create a connection to the MySQL server
