@@ -1,5 +1,5 @@
 ---
-title: research_imagegen_api
+title: sm_stock_prediction_api
 emoji: 🐠
 colorFrom: red
 colorTo: red
