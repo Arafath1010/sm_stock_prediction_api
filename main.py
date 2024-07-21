@@ -6,8 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from io import StringIO
 import os
 import uuid,requests
+import data_collector as dc
 
-
+data,message = get_data(b_id=637,product_name = "RS 10 TOFFEE")
 
 app = FastAPI()
 app.add_middleware(
