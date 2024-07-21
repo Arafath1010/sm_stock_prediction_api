@@ -20,8 +20,8 @@ app.add_middleware(
 
 
 
-@app.post("/get_image_for_text")
-async def get_image_for_text(b_id:int,product_name:str):
+@app.post("/get_product_count_prediction")
+async def get_product_count_prediction(b_id:int,product_name:str):
     # main
     data,message = dc.get_data(b_id = b_id , product_name = product_name)
     
@@ -33,4 +33,10 @@ async def get_image_for_text(b_id:int,product_name:str):
         
       full_trend,forecasted_value,rounded_value = dc.forecast(monthly_sales)
       print(full_trend,forecasted_value,rounded_value)
-      return {"predicted_count" : str(rounded_value)}
+        
+      rounded_value.columns = ["next_month", "y", "predicted_count"]
+        
+      # Convert to dictionary
+      result_dict = rounded_value.to_dict(orient="records")[0]
+        
+      return result_dict
