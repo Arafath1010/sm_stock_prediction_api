@@ -23,7 +23,7 @@ print(message)
 
 
 @app.post("/get_image_for_text")
-async def get_image_for_text(b_id:int,product_name:str)
+async def get_image_for_text(b_id:int,product_name:str):
     # main
     data,message = dc.get_data(b_id = b_id , product_name = product_name)
     if message=="done":
