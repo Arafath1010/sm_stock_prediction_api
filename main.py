@@ -86,7 +86,7 @@ def delete_json(b_id):
     cursor.execute(delete_query, (b_id,))
     # Commit the transaction
     connection.commit()
-    print(f"Record with BID {bid_to_delete} deleted successfully")
+    print(f"Record with BID {b_id} deleted successfully")
     # Close the cursor and connection
     cursor.close()
     connection.close()
