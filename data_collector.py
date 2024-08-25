@@ -102,7 +102,6 @@ def get_data(b_id,product_name):
   WHERE `t`.`type` = 'sell'
   AND `t`.`status` = 'final'
   AND `t`.`business_id` = {b_id}
-  AND `p`.`name` = '{product_name}'
   GROUP BY `b`.`id`,
           `transaction_sell_lines`.`id`;
   """
