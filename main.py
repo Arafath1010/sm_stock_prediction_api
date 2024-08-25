@@ -21,7 +21,7 @@ async def get_product_count_prediction(b_id: int):
         
         if message == "done":
 
-            grouped_df = df.groupby('product_name')
+            grouped_df = data.groupby('product_name')
 
             results = []
             for product_name, data in grouped_df:
