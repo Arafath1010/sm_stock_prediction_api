@@ -42,6 +42,7 @@ async def get_product_count_prediction(b_id: int):
                                 "predicted_count": result_dict["predicted_count"]
                             })
                 except Exception as e:
+                    print(str(e))
                     results.append({
                                 "Product Name" : product_name,
                                 "next_month": str(e),
@@ -58,6 +59,7 @@ async def get_product_count_prediction(b_id: int):
         else:
             raise HTTPException(status_code=400, detail=message)
     except Exception as e:
+        print(str(e))
         response_content = {
             "status": "error",
             "message": str(e),
