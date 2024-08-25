@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def insert_data(bid,forecast_data):#mysql-connector-python
+def insert_data(b_id,forecast_data):#mysql-connector-python
     import mysql.connector
     import json
     
@@ -46,7 +46,7 @@ def insert_data(bid,forecast_data):#mysql-connector-python
     """
     
     # Execute the SQL command with data
-    cursor.execute(insert_query, (bid, forecast_data_json))
+    cursor.execute(insert_query, (b_id, forecast_data_json))
     
     # Commit the transaction
     connection.commit()
@@ -230,7 +230,7 @@ async def generate_product_count_prediction(b_id: int):
 
 
             delete_json(b_id)
-            insert_data(bid,results)
+            insert_data(b_id,results)
             return {"status": "success",
                     "b_id":b_id,
                     "message": "Prediction successful and saved to DB",
