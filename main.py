@@ -42,6 +42,7 @@ def forecast(monthly_sales):
     return combined_sales, original_forecasted_value, rounded_value
 
 def process_product(product_name, data):
+    full_trend = ""
     try:
         # Get today's date
         today = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
