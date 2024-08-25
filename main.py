@@ -6,6 +6,7 @@ import pandas as pd
 from prophet import Prophet
 import math
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 
 app = FastAPI()
 app.add_middleware(
@@ -42,6 +43,20 @@ def forecast(monthly_sales):
 
 def process_product(product_name, data):
     try:
+        # Get today's date
+        today = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+    
+        # Create a new fake transaction with today's date and selling count 0
+        fake_transaction = data.iloc[0].copy()
+        fake_transaction['transaction_date'] = today
+        fake_transaction['sell_qty'] = 0
+    
+        # Convert fake_transaction to a DataFrame
+        fake_transaction_df = pd.DataFrame([fake_transaction])
+    
+        # Concatenate the original DataFrame with the new fake transaction DataFrame
+        data = pd.concat([data, fake_transaction_df], ignore_index=True)
+        
         # Summarize the sales count per month
         data['transaction_date'] = pd.to_datetime(data['transaction_date'])
         data.set_index('transaction_date', inplace=True)
