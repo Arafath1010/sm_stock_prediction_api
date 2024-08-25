@@ -17,16 +17,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+import mysql.connector
+import json
+    
+# Define connection parameters
+host = "68.183.225.237"
+user = "sm_ml"
+password = "Fz6/I733"
+database = "sm_qa_1"
+
 def insert_data(b_id,forecast_data):#mysql-connector-python
-    import mysql.connector
-    import json
-    
-    # Define connection parameters
-    host = "68.183.225.237"
-    user = "sm_ml"
-    password = "Fz6/I733"
-    database = "sm_qa_1"
-    
     # Establish connection
     connection = mysql.connector.connect(
         host=host,
@@ -59,14 +60,6 @@ def insert_data(b_id,forecast_data):#mysql-connector-python
 
 
 def delete_json(b_id):
-    import mysql.connector
-    
-    # Define connection parameters
-    host = "68.183.225.237"
-    user = "sm_ml"
-    password = "Fz6/I733"
-    database = "sm_qa_1"
-    
     # Establish connection
     connection = mysql.connector.connect(
         host=host,
@@ -92,15 +85,6 @@ def delete_json(b_id):
     connection.close()
 
 def get_data(b_id):
-    import mysql.connector
-    import json
-    
-    # Define connection parameters
-    host = "68.183.225.237"
-    user = "sm_ml"
-    password = "Fz6/I733"
-    database = "sm_qa_1"
-    
     # Establish connection
     connection = mysql.connector.connect(
         host=host,
