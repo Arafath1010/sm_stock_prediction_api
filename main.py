@@ -51,9 +51,7 @@ async def get_product_count_prediction(b_id: int):
             response_content = {
                 "status": "success",
                 "message": "Prediction successful",
-                "data": {
-                    results
-                }
+                "data": results
             }
             return JSONResponse(content=response_content, status_code=200)
             
