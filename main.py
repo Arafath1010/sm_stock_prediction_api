@@ -14,34 +14,49 @@ app.add_middleware(
 )
 
 @app.post("/get_product_count_prediction")
-async def get_product_count_prediction(b_id: int, product_name: str):
+async def get_product_count_prediction(b_id: int):
     try:
         # main
-        data, message = dc.get_data(b_id=b_id, product_name=product_name)
+        data, message = dc.get_data(b_id=b_id, product_name="sample")
         
         if message == "done":
-            # Summarize the sales count per month
-            data['transaction_date'] = pd.to_datetime(data['transaction_date'])
-            data.set_index('transaction_date', inplace=True)
-            monthly_sales = data['sell_qty'].resample('M').sum().reset_index()
-            
-            full_trend, forecasted_value, rounded_value = dc.forecast(monthly_sales)
-            print(full_trend, forecasted_value, rounded_value)
-            
-            rounded_value.columns = ["next_month", "y", "predicted_count"]
-            
-            # Convert to dictionary
-            result_dict = rounded_value.to_dict(orient="records")[0]
-            
+
+            grouped_df = df.groupby('product_name')
+
+            results = []
+            for product_name, data in grouped_df:
+                # Summarize the sales count per month
+                data['transaction_date'] = pd.to_datetime(data['transaction_date'])
+                data.set_index('transaction_date', inplace=True)
+                monthly_sales = data['sell_qty'].resample('M').sum().reset_index()
+                
+                try:
+                    full_trend, forecasted_value, rounded_value = forecast(monthly_sales)
+                    rounded_value.columns = ["next_month", "y", "predicted_count"]
+                    # Convert to dictionary
+                    result_dict = rounded_value.to_dict(orient="records")[0]
+                    #print(full_trend, forecasted_value, rounded_value)
+                    results.append({
+                                "Product Name" : product_name,
+                                "next_month": str(result_dict["next_month"]),
+                                "predicted_count": result_dict["predicted_count"]
+                            })
+                except Exception as e:
+                    results.append({
+                                "Product Name" : product_name,
+                                "next_month": str(e),
+                                "predicted_count": "not predicted"
+                            })
+                    break      
             response_content = {
                 "status": "success",
                 "message": "Prediction successful",
                 "data": {
-                    "next_month": str(result_dict["next_month"]),
-                    "predicted_count": result_dict["predicted_count"]
+                    results
                 }
             }
             return JSONResponse(content=response_content, status_code=200)
+            
         else:
             raise HTTPException(status_code=400, detail=message)
     except Exception as e:
