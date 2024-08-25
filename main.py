@@ -71,12 +71,14 @@ def process_product(product_name, data):
             "Product Name": product_name,
             "next_month": str(result_dict["next_month"]),
             "predicted_count": result_dict["predicted_count"]
+            "full_trend" : full_trend
         }
     except Exception as e:
         return {
             "Product Name": product_name,
             "next_month": str(e),
             "predicted_count": "not predicted"
+            "full_trend" : full_trend
         }
 
 @app.post("/get_product_count_prediction")
