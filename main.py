@@ -228,7 +228,7 @@ async def generate_product_count_prediction(b_id: int):
             "status": "error",
             "message": str(e),
             "data": None,
-            "status_code":200
+            "status_code":500
         }
         return response_content
 
