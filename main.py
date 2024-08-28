@@ -84,7 +84,10 @@ def delete_json(b_id):
     cursor.close()
     connection.close()
 
-def get_data(b_id):
+def get_data(b_id,page_number,page_size):
+    start = (page_number - 1) * page_size
+    end = start + page_size
+
     # Establish connection
     connection = mysql.connector.connect(
         host=host,
@@ -119,12 +122,12 @@ def get_data(b_id):
         result = {
             "BID":bid,
             "created_at":created_at,
-            "forecast_data":forecast_data
+            "forecast_data":forecast_data[start:end]
         }
         return result
         
     else:
-        return None
+        return f"plesae genertae forcast for this business id:{b_id}"
     
     # Close the cursor and connection
     cursor.close()
@@ -234,11 +237,11 @@ async def generate_product_count_prediction(b_id: int):
 
 
 @app.post("/get_product_count_prediction_from_DB")
-async def get_product_count_prediction_from_DB(b_id: int):
+async def get_product_count_prediction_from_DB(b_id: int,page_number :int,page_size :int):
         response_content = {
             "status": "done",
             "message": "data from DB",
-            "data": get_data(b_id),
+            "data": get_data(b_id,page_number,page_size),
             "status_code":200
         }
         return response_content
