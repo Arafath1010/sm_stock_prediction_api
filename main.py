@@ -119,10 +119,11 @@ def get_data(b_id,page_number,page_size):
         
         # Convert JSON string back to Python dictionary
         forecast_data = json.loads(forecast_data_json)
+        sorted_forecast_data = sorted(forecast_data["data"]["forecast_data"], key=lambda x: x["predicted_count"], reverse=True)
         result = {
             "BID":bid,
             "created_at":created_at,
-            "forecast_data":forecast_data[start:end]
+            "forecast_data":sorted_forecast_data[start:end]
         }
         return result
         
